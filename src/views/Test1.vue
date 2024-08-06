@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts" setup>
-    import { computed, reactive, ref } from 'vue';
+    import { computed, onMounted, reactive, ref } from 'vue';
 
     const status = ref<string>('open')
     const form = reactive<any>({});
@@ -60,6 +60,21 @@
 
     const publishedBooksMessage = computed(() => {
         return author.books.length > 0 ? 'Have' : 'Not'
+    })
+
+    const fetchData = async () => {
+        console.log('data...');
+    }
+
+    const fetchData1 = async () => {
+        console.log('data1...');
+    }
+
+    
+
+    onMounted(async () => {
+        await fetchData();
+        await fetchData1();
     })
 
 </script>
