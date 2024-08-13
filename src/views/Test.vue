@@ -8,6 +8,16 @@
         <TestComponent :is-apple1="apple" @success-event="callback"/>
         <hr/>
         <TestComponent1/>
+
+
+        <hr/>
+        <TestComponent2>
+            <template v-slot:header>
+                <div style="color:red">
+                    This is Test2
+                </div>
+            </template>
+        </TestComponent2>
     </div>
 </template>
 
@@ -15,6 +25,7 @@
 import { ref, watch } from 'vue';
 import TestComponent from './components/Test.component.vue'
 import TestComponent1 from './components/Test1.component.vue'
+import TestComponent2 from './components/Test2.component.vue'
 
     const amount = ref(1);
     const price = ref(10000);
