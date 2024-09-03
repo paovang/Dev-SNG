@@ -1,6 +1,7 @@
 <template>
-    <div>
-        Show: {{ data.name }}<br/>
+    <div class="text-center">
+        <div class="grid">
+            Show: {{ data.name }}<br/>
         Show Age: {{ data.age }}<br/>
         Show1: {{ data1.name }}<br/>
         Show Msg: {{ data1.msg }}<br/>
@@ -21,19 +22,33 @@
        <input v-model="form.name" placeholder="please enter name..."><br/>
        <input v-model="form.surname" placeholder="please enter surname..."><br/>
         <button @click="submitData">Submit Data</button>
-       
+        <hr/>
+        <button @click="setLocale('la')">LA</button><br/>
+        <button @click="setLocale('en')">EN</button>
+       <hr/>
+       Show User: {{ user }}
+       Show Role: {{ role }}<br/>
+       Show Language: {{ $t('message.hello')}}
+        </div>
 
     </div>
 </template>
 
 <script lang="ts" setup>
     import { computed, onMounted, reactive, ref } from 'vue';
+    import { userStore } from '../store/user.store';
+
+    const { getUser, user, role, form, addUser } = userStore()
 
     const status = ref<string>('open')
-    const form = reactive<any>({});
 
-    const submitData = () => {
-        console.log(form);
+    const submitData = async () => {
+        await addUser();
+    }
+
+    const setLocale = async (value: string) => {
+        localStorage.setItem('locale', value);
+        window.location.reload();
     }
 
     const data = ref<any>({});
@@ -75,6 +90,7 @@
     onMounted(async () => {
         await fetchData();
         await fetchData1();
+        await getUser();
     })
 
 </script>
@@ -85,5 +101,10 @@
     }
     .status-open {
         color: green
+    }
+    .text-center {
+        padding: 20px 0px 0px 0px;
+        display: grid;
+        place-items: center;
     }
 </style>
