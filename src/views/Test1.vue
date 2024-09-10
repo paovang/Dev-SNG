@@ -1,7 +1,7 @@
 <template>
     <div class="text-center">
         <div class="grid">
-            Show: {{ data.name }}<br/>
+            Show Data: {{ data.name }}<br/>
         Show Age: {{ data.age }}<br/>
         Show1: {{ data1.name }}<br/>
         Show Msg: {{ data1.msg }}<br/>
